@@ -635,16 +635,18 @@
 <h4 id="tar指令"><a href="#tar指令" class="headerlink" title="tar指令"></a>tar指令</h4><p>打包指令，打包后的文件是.tar.gz文件<br>【tar [选项] XXX.tar.gz 文件内容】<br>       【-c】产生.tar打包文件；【-v】显示详细信息；<br>       【-f】指定压缩后的文件名；【-z】打包同时压缩；<br>       【-x】解包.tar文件<br>       【tar -zcvf a.tar.gz a1.txt a2.txt】新建一个a.tar.gz文件，将a1.txt和a2.txt打包压缩到该文件并显示压缩详细信息<br>       【tar -zxvf a.tar.gz】解压a.tar.gz文件到当前目录下<br>       【tar -zcvf myhome.tar.gz /home/】将/home目录下所有文件打包压缩到myhome.tar.gz文件下<br>       【tar -zxvf myhome.tar.gz -C /opt/tmp/】将myhome.tar.gz解压到指定目录/opt/tmp下（解压到的目录需要事先存在）</p>
 <h2 id="11-组管理和权限管理"><a href="#11-组管理和权限管理" class="headerlink" title="11 组管理和权限管理"></a>11 组管理和权限管理</h2><p>文件所有者：一般为文件的创建者，查看文件的所有者【ls -ahl】；【chown 用户名 文件名】修改文件所有者<br>修改文件所在组【chgrp 组名 文件名】<br>改变用户所在组【usermod -g 组名 用户名】<br>改变该用户登陆的初始目录【usermod -d 目录名 用户名】<br>    - rw- r - - r - -. 1 tom police 6 3月 18 19：24 ok.txt<br>    【-】文件的类型：-普通文件          d:目录    l：软连接       c：字符设备    b：块文件，硬盘<br>    【rw】文件所有者的权限<br>    【r - -】文件所在组的用户拥有的权限<br>    【r - -】文件其他组的用户的权限<br>    【1】如果是文件，表示硬链接的数，如果是目录则表示该目录的子目录的个数<br>    【6】文件的大小（如果是目录就为4096）<br>    【3月 18 19：24】文件最后的修改时间</p>
 <ul>
-<li><p>rwx权限详解：</p>
+<li>rwx权限详解：</li>
+<li>作用到文件：<ul>
+<li>【r】代表可读：可以读取查看</li>
+<li>【w】代表可写：可以修改但不可以删除，对该文件所在的目录有写权限才可以删除</li>
+</ul>
 </li>
-<li><p>作用到文件：【r】代表可读：可以读取查看</p>
-<pre><code>【w】代表可写：可以修改但不可以删除，对该文件所在的目录有写权限才可以删除
-【x】代表可执行
-</code></pre>
-</li>
-<li><p>作用到目录：【r】代表可读；【w】代表可写：可以修改，目录内创建+删除+重命名目录</p>
-<pre><code>【x】代表可执行：可以进入该目录
-</code></pre>
+<li>【x】代表可执行</li>
+<li>作用到目录：<ul>
+<li>【r】代表可读；</li>
+<li>【w】代表可写：可以修改，目录内创建+删除+重命名目录</li>
+<li>【x】代表可执行：可以进入该目录</li>
+</ul>
 </li>
 </ul>
 <h3 id="11-1-修改权限-【chmod】"><a href="#11-1-修改权限-【chmod】" class="headerlink" title="11.1 修改权限  【chmod】"></a>11.1 修改权限  【chmod】</h3><p>通过字母变更权限 （u：所有者，g：所有组，o：其他人，a：所有人（u、g、o的总和）<br>              【chmod u=rwx,g=rx,o=x 文件目录名】<br>              【chmod o+w 文件目录名】<br>              【chmod a-x 文件目录名】<br>  第二种方式：通过数字变更权限（r=4，w=2，x=1；因此rwx=4+2+1=7）—（111=7，110=6，101=5）<br>      【chmod 751】相当于【chmod u=rwx，g=rx，o=x 文件目录名】</p>
